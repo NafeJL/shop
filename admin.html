@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+
+        .table-container {
+            overflow-x: auto; 
+            background: rgba(255, 255, 255, 0);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        table { width: 100%; border-collapse: collapse; background: rgba(0, 0, 0, 0); }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #333; color: white; }
+        td { white-space: nowrap; }
+
+        /* Exception: Allow the Items list to stack vertically */
+        td.items-col { white-space: normal; min-width: 200px; }
+
+        /* 3. TRUNCATION FOR LONG TEXT */
+        /* detailed-col limits width and adds '...' if text is too long */
+        .detailed-col {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Status Colors */
+        .status-paid { color: #d9534f; font-weight: bold; } /* Red/Orange for Pending */
+        .status-shipped { color: green; font-weight: bold; }
+        
+        /* Button Style */
+        .btn-ship {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-ship:hover { background-color: #0056b3; }
+    </style>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <h1 class="gradient-text">Our Shop Orders</h1>
+    <div class="table-container">
+        <table id="orders-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Customer</th>
+                    <th>Email</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Shipping To</th>
+                    <th>Action</th> </tr>
+                </tr>
+            </thead>
+            <tbody id="orders-body">
+                </tbody>
+        </table>
+    </div>
+    <script>
+        let currentPassword = null;
+
+        const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:5000'
+            : 'https://vaexium.com';
+
+        async function loadOrders() {
+            if (!currentPassword) {
+                currentPassword = prompt("Enter Admin Password:");
+            }            
+
+            if (!currentPassword) return;
+
+            const response = await fetch(`${API_BASE_URL}/api/orders`, {
+                headers: {
+                    'x-admin-password': currentPassword
+                }
+            });
+
+            if (response.status === 403) {
+                alert("Wrong password!");
+                currentPassword = null;
+                return;
+            }            
+
+            const orders = await response.json();
+            const tbody = document.getElementById('orders-body');
+
+            tbody.innerHTML = orders.data.map(order => {
+                // Create a readable list of items
+                const itemsList = order.items.map(item => 
+                    `<div>${item.quantity}x ${item.description}</div>`
+                ).join('');
+
+                // Format the address (handle potential nulls gracefully)
+                const addr = order.shippingAddress || {};
+                const addressString = addr.line1 ? 
+                    `${addr.line1}, ${addr.city}, ${addr.postal_code}, ${addr.country}` : 
+                    "No Address Provided";
+
+                const status = order.status || 'Pending'; // Default to Pending if missing
+                const statusClass = status === 'Shipped' ? 'status-shipped' : 'status-paid';
+                
+                // 4. Determine Button Logic
+                const actionButton = status === 'Pending' 
+                    ? `<button class="btn-ship" onclick="markShipped('${order._id}')">Mark Shipped</button>` 
+                    : '✅ Completed';
+
+                return `
+                    <tr>
+                        <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+                        <td><span class="${statusClass}">${status}</span></td>
+                        <td>${order.customerName}</td>
+                        <td>${order.customerEmail}</td>
+                        <td>${itemsList}</td>
+                        <td>£${order.amountTotal}</td>
+                        <td>${addressString}</td>
+                        <td>${actionButton}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        async function markShipped(orderId) {
+            if(!confirm("Are you sure this order is shipped?")) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/ship`, {
+                    method: 'PUT',
+                    headers: {
+                        'x-admin-password': currentPassword
+                    }
+                });
+
+                if (response.ok) {
+                    loadOrders(); // Refresh the table automatically
+                } else {
+                    alert("Failed to update order.");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Error connecting to server.");
+            }
+        }
+
+        loadOrders();
+    </script>
+</body>

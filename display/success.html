@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful | Vaexium</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* Local overrides for perfect centering on a transaction page */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .status-card {
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .icon-large {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px var(--glow-primary));
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-glow"></div>
+    <div class="stars-wrapper">
+        <div class="stars-small"></div>
+        <div class="stars-medium"></div>
+        <div class="stars-large"></div>
+    </div>
+
+    <main class="card status-card">
+        <div class="icon-large">✓</div>
+        
+        <h1 class="gradient-text" style="font-size: 2.5rem; margin: 0;">Payment<br>Successful</h1>
+        
+        <p class="subtitle" style="font-size: 1rem;">
+            Thank you for your support. Your transaction has been completed successfully.
+        </p>
+
+        <div style="margin-top: 20px;">
+            <a href="../display/" class="btn-primary">Return Home</a>
+        </div>
+    </main>
+
+</body>
+</html>

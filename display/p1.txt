@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Vaexium</title>
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+<body style="background-color: #0A0000;">
+
+    <div class="background-glow"></div>
+    
+    <div class="stars-wrapper">
+        <div class="stars-small"></div>
+        <div class="stars-medium"></div>
+        <div class="stars-large"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon"></div> 
+            <span>Vaexium Shop</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" style="color: var(--text-main);">Playlists</a></li>
+            <li><a href="#" class="btn-primary">Suggest a Track</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero hero-standard">
+        <div class="badge">Quality Items</div>
+        <h1 class="gradient-text">The Store</h1>
+        <p class="subtitle">My designs incarnate. 3D modelled, 3D printed products.</p>
+    </header>
+
+    <main class="container">
+
+        <div class="card-grid">
+            
+            <article class="card">
+                <div class="playlist-cover" style="border:none; overflow: hidden;">
+                    <img src="images/Fox.jpg" alt="Sleeping Minecraft Fox" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Cute</span>
+                    <span class="tag">Toy</span>
+                </div>
+                <h3>Sleeping Fox Desk Ornament from Minecraft</h3>
+                <p class="card-desc">Description.</p>
+                <a href="#" class="card-link">Purchase &rarr;</a>
+            </article>
+
+            <article class="card">
+                <div class="playlist-cover" style="border:none; overflow: hidden;">
+                    <img src="images/Fox.jpg" alt="Sleeping Minecraft Fox" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Cute</span>
+                    <span class="tag">Toy</span>
+                </div>
+                <h3>Sleeping Fox Desk Ornament from Minecraft</h3>
+                <p class="card-desc">Description.</p>
+                <a href="#" class="card-link">Purchase &rarr;</a>
+            </article>
+
+            <article class="card">
+                <div class="playlist-cover" style="border:none; overflow: hidden;">
+                    <img src="images/Fox.jpg" alt="Sleeping Minecraft Fox" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Cute</span>
+                    <span class="tag">Toy</span>
+                </div>
+                <h3>Sleeping Fox Desk Ornament from Minecraft</h3>
+                <p class="card-desc">Description.</p>
+                <a href="#" class="card-link">Purchase &rarr;</a>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Vaexium. Built for enjoyment. Proof of Concept.</p>
+    </footer>
+
+</body>
+</html>
+
+style.css:
+:root {
+    /* 1. Base Palette & Accents */
+    --color-bg-dark: hsl(325, 100%, 4%);
+    --color-white: #ffffff;
+    --color-primary-1: hsl(345, 100%, 81%); /* Pinkish Purple */
+    --color-primary-2: hsl(334, 100%, 81%); /* Mid Purple */
+    --color-primary-3: hsl(303, 100%, 81%); /* Blueish Purple */
+    
+    /* 2. Gradients */
+    --gradient-primary: linear-gradient(90deg, var(--color-primary-1) 0%, var(--color-primary-2) 50%, var(--color-primary-3) 100%);
+    --gradient-text-vertical: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+    --gradient-glass-line: linear-gradient(90deg, rgba(334,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    --gradient-glow-bg: radial-gradient(circle at center, hsla(334, 100%, 70%, 0.15) 0%, hsla(249, 100%, 4%, 0) 70%);
+
+    /* 3. Text Colors */
+    --text-main: var(--color-white);
+    --text-muted: hsla(326, 80%, 96%, 0.759);
+    --text-link: var(--color-primary-3);
+    --text-link-hover: var(--color-primary-2);
+
+    /* 4. Glass Surfaces (Backgrounds) */
+    /* Increasing opacity levels */
+    --glass-bg-subtle: rgba(255, 255, 255, 0.03);
+    --glass-bg-low: rgba(255, 255, 255, 0.05);
+    --glass-bg-medium: rgba(255, 255, 255, 0.06);
+    --glass-bg-high: rgba(255, 255, 255, 0.1);
+    --glass-bg-hover: rgba(255, 255, 255, 0.2);
+    --nav-bg: hsla(325, 100%, 4%, 0.5);
+
+    /* 5. Borders & Lines */
+    --border-faint: rgba(255, 255, 255, 0.05);
+    --border-low: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.1);
+    --border-highlight: rgba(255, 255, 255, 0.2);
+    --border-active: rgba(255, 255, 255, 0.3);
+
+    /* 6. Shadows & Glows */
+    --glow-primary: hsla(258, 100%, 81%, 0.3);
+    --glow-primary-strong: hsla(258, 100%, 81%, 0.4);
+    --shadow-card: rgba(0, 0, 0, 0.5);
+    
+    /* 7. Fonts */
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    
+}
+
+body {
+    background-color: var(--color-bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 1px;
+    overflow-x: hidden;
+}
+
+/* --- Background Effects --- */
+.background-glow {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 150vh;
+    background: var(--gradient-glow-bg);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- Typography --- */
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    backdrop-filter: blur(10px);
+    background: var(--nav-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-faint);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.logo-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-primary);
+    border-radius: 4px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.nav-links a:hover { color: var(--text-main); }
+
+.btn-primary {
+    background: var(--glass-bg-high);
+    border: 1px solid var(--border-medium);
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: var(--text-main) !important;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--border-active);
+    box-shadow: 0 0 15px var(--glow-primary);
+}
+
+.hero {
+    text-align: center;
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.space {
+    padding-top: 420px;
+}
+
+.badge {
+    border: 1px solid var(--border-medium);
+    background: var(--glass-bg-low);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--color-primary-2);
+    margin-bottom: 20px;
+    backdrop-filter: blur(5px);
+}
+
+h1.gradient-text {
+    font-size: 4rem;
+    line-height: 1.1;
+    font-weight: 600;
+    margin-bottom: 20px;
+    background: var(--gradient-text-vertical);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.6;
+    text-shadow: 2px 2px 4px hsla(325, 100%, 12%, 0.5);
+}
+
+/* --- Card Grid --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px 20px;
+    display: block;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin: 60px 0 25px 0; /* Spacing above and below title */
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-low);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none; /* Prevents highlighting text while clicking */
+    justify-content: space-between; /* Pushes the arrow to the far right */
+    transition: color 0.3s ease;
+}
+
+.section-title:hover {
+    text-shadow: 0 0 10px var(--glow-primary);
+}
+
+.section-title.collapsed::after {
+    transform: rotate(-90deg);
+    color: var(--text-muted);
+}
+
+.section-title::after {
+    content: '⛛';
+    font-size: 1rem;
+    color: var(--color-primary-1);
+    margin-left: 15px;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy transition */
+}
+
+.section-title span {
+    color: var(--color-primary-2); /* Adds a nice accent color */
+}
+
+/* --- Cards --- */
+.card {
+    background: var(--glass-bg-subtle);
+    border: 1px solid var(--border-low);
+    border-radius: 16px;
+    padding: 32px;
+    transition: 0.3s ease;
+    /* Ensure relative position so pseudo-elements align correctly */
+    position: relative; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Ensure z-index is higher than the pseudo-element tint layer */
+    z-index: 2; 
+    transform: translate3d(0,0,0);
+    /* Initialize the variable so it has a default value before JS kicks in */
+    --dominant-color: transparent; 
+}
+
+/* Create the tint layer */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Use the CSS variable that JS will populate later */
+    background: var(--dominant-color);
+    /* Start invisible */
+    opacity: 0;
+    /* Place it behind the card text content but in front of the main card background */
+    z-index: -1; 
+    border-radius: inherit; /* Inherit the card's rounded corners */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Optional: subtle scale effect on the glow */
+    
+    /* Optional: mix blend mode for a more vibrant glass effect. 
+       Try 'overlay' or 'soft-light' if 'normal' is too dull. */
+    mix-blend-mode: normal; 
+}
+
+.card:hover {
+    /* Keep existing glass hover change */
+    background: var(--glass-bg-medium);
+    border-color: var(--border-highlight);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--shadow-card);
+    /* z-index increased slightly on hover */
+    z-index: 10;
+}
+
+/* Reveal the tint layer on hover */
+.card:hover::after {
+    /* Adjust opacity to control how strong the tint is (0.1 to 0.3 is usually good) */
+    opacity: 0.2; 
+    transform: scale(1);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gradient-glass-line);
+    opacity: 0.5;
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.card-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.card-link {
+    font-size: 0.9rem;
+    color: var(--text-link);
+    font-weight: 500;
+}
+
+.card-link:hover {
+    color: var(--text-link-hover);
+    text-shadow: 0 0 10px var(--glow-primary-strong);
+}
+
+.card:hover .playlist-cover {
+    border-color: var(--color-primary-2);
+    box-shadow: inset 0 0 20px var(--glow-primary);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    max-height: 4000px; /* Arbitrary height larger than content */
+    opacity: 1;
+    transform: translateY(0);
+    transition: 
+        max-height 0.5s ease-in-out,
+        opacity 0.4s ease-in-out,
+        transform 0.4s ease,
+        margin 0.4s ease;
+    overflow: visible;
+}
+
+.card-grid.hidden {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-20px); /* Slide up effect */
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none;
+
+    overflow: hidden;
+    visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.vaexium-logo {
+    position: absolute; 
+    top: 430px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;     
+    height: 800px;
+    width: auto;
+
+    object-fit: cover;
+
+    /* Derived from Reflect source code */
+    /* Center visible and fades edges to invisible */
+    -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%);
+    mask-image: radial-gradient(circle, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 70%);
+    opacity: 0; 
+
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.stars-small, .stars-medium, .stars-large {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: 1px;
+    display: block;
+    opacity: 0;
+}
+
+.stars-small::after, .stars-medium::after, .stars-large::after {
+    content: " ";
+    position: absolute;
+    top: 100vh;
+    width: inherit;
+    height: inherit;
+    background: transparent;
+    box-shadow: inherit;
+}
+
+.stars-small {
+  width: 1px;
+  height: 1px;
+  box-shadow: 
+    10vw 10vh #FFF, 20vw 40vh #FFF, 50vw 80vh #FFF, 80vw 10vh #FFF, 
+    90vw 90vh #FFF, 15vw 60vh #FFF, 35vw 20vh #FFF, 75vw 50vh #FFF; 
+  animation: animStar 5s linear infinite,  fadeIn 2s ease-out forwards;
+  animation-delay: 0s;
+}
+
+.stars-medium {
+  width: 2px;
+  height: 2px;
+  box-shadow: 
+    30vw 20vh #FFF, 60vw 40vh #FFF, 10vw 90vh #FFF, 
+    85vw 30vh #FFF, 40vw 70vh #FFF;
+  animation: animStar 10s linear infinite,  fadeIn 2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.stars-large {
+  width: 3px;
+  height: 3px;
+  box-shadow: 
+    50vw 30vh #FFF, 20vw 70vh #FFF, 80vw 80vh #FFF;
+  animation: animStar 15s linear infinite,  fadeIn 2s ease-out forwards;
+  animation-delay: 1s;
+}
+
+.stars-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-standard {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+/* specific styling for playlist placeholders */
+.playlist-cover {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: var(--glass-bg-low);
+    border-radius: 8px;
+    border: 1px solid var(--border-medium);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+}
+
+
+
+.tag-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: var(--glass-bg-medium);
+    color: var(--text-muted);
+    border: 1px solid var(--border-faint);
+}
+
+@keyframes animStar {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-100vh); }
+}
+
+@keyframes  fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+footer {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-low);
+    margin-top: auto; 
+    padding-top: 60px; 
+    padding-bottom: 60px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    h1.gradient-text { font-size: 3rem; }
+    .navbar { padding: 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 80px; }
+}
+
+Can you edit this to work more 

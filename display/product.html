@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading... | Vaexium</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="shop-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background-color: #0A0000;">
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon"></div> 
+            <span>Vaexium Shop</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Back to Shop</a></li>
+            <li class="cart-trigger" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-badge">0</span>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button onclick="toggleCart()" class="close-cart">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total-row"><span>Total:</span><span id="cart-total">£0.00</span></div>
+            <button class="btn-primary full-width" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <main class="container" style="padding-top: 60px;">
+        <div id="product-detail" class="product-detail-layout">
+            <p style="text-align:center;">Loading product...</p>
+        </div>
+    </main>
+
+    <script src="script.js"></script> <script>
+        // 1. Get ID from URL (e.g., ?id=1)
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // 2. Fetch specific product
+        async function loadSingleProduct() {
+            if(!productId) return;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products/${productId}`);
+                if(!response.ok) throw new Error("Product not found");
+                
+                const product = await response.json();
+                products = [product];
+                renderSingleProduct(product);
+                document.title = `${product.name} | Vaexium`;
+            } catch (err) {
+                document.getElementById('product-detail').innerHTML = `<h2>Product not found</h2><a href="index.html">Go Back</a>`;
+            }
+        }
+
+        function renderSingleProduct(product) {
+            const container = document.getElementById('product-detail');
+            container.innerHTML = `
+                <div class="detail-image">
+                    <img 
+                        src="${product.image}" 
+                        alt="${product.name}" 
+                        loading="lazy"  style="width: 100%; height: 100%; object-fit: cover;"
+                    >
+                </div>
+                <div class="detail-info">
+                    <div class="tag-container">
+                        ${product.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <h1 class="gradient-text" style="font-size: 2.5rem; text-align:left;">${product.name}</h1>
+                    <p class="price" style="font-size: 2rem; font-weight: bold; margin: 20px 0;">£${product.price}</p>
+                    <p class="description" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 30px;">
+                        ${product.description}
+                        <br><br>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                    <button class="btn-primary" onclick="addToCart(${product.id})" style="padding: 15px 40px; font-size: 1.1rem;">
+                        Add to Cart
+                    </button>
+                </div>
+            `;
+        }
+
+        // split script.js into separate cart and shop files dumbfuck
+        loadSingleProduct();
+    </script>
+</body>
+</html>
