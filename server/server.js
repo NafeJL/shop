@@ -20,9 +20,27 @@ app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
-// CORS said the 1930s child
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    process.env.SERVER_URL,
+    'https://vaexium.com',        
+    'http://localhost:5500',
+    'http://127.0.0.1:5500'
+];
+
 app.use(cors({
-    origin: [process.env.CLIENT_URL, 'https://vaexium.com']
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or Postman)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log("Blocked by CORS:", origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
 }));
 
 // WEBHOOK ROUTE (Must be before express.json else peril)
