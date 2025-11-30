@@ -4,9 +4,7 @@ let cart = JSON.parse(localStorage.getItem('vaexium-cart')) || [];
 
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:5000'
-    : 'https://vaexium.com';
-
-
+    : 'https://vaexium-shop-api.onrender.com';
 
 // 2. Fetch Data from Backend
 async function loadProducts() {
@@ -15,7 +13,7 @@ async function loadProducts() {
         const response = await fetch(`${API_BASE_URL}/api/products`);
         products = await response.json(); // Save database data into our variable
         
-        renderProducts(); // NOW we render the HTML
+        renderProducts();
     } catch (error) {
         console.error("Failed to fetch products:", error);
         document.getElementById('product-grid').innerHTML = "<p>Error loading shop items.</p>";
